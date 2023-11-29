@@ -1,10 +1,65 @@
 {% extends "base.html" %}
+<head>
+    <style>
+        body {
+            /* Set the background image */
+            background-image: url('background.jpg'); /* Replace 'your-image-url.jpg' with your image file path or URL */
+
+            /* Set background properties */
+            background-size: cover; /* Cover the entire viewport */
+            background-position: center; /* Center the image */
+            background-repeat: no-repeat; /* Do not repeat the image */
+            height: 100vh; /* Make the background cover the entire viewport height */
+
+            /* Add additional styles if needed */
+            color: white; /* Set text color to white for better visibility */
+        }
+        .container {
+            text-align: center;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: lightblue;
+            color: black;
+            width: 500px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
 {% block title %}Home{% endblock %}
 {% block content %}
     {% if 'email' in session %}
-    	 <h1> This is the temporary home page for user {{ session['email'] }}</h1>>
+    	 <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">User: {% user.email %}</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Modify Profile<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">View Travel History</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">View Travel Recommendations</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Book a Trip</a>
+            </li>
+        </ul>
+    </div>
+</nav>
     {% else %}
-        <h1> please log in or sign up first</h1>
+        <div class="container">
+        <h1>Welcome to Explorify</h1>
+        <p>Please log in or sign up first.</p>
+    </div>
     {% endif %}
 {% endblock %}
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 

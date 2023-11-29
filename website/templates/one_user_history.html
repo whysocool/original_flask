@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}One user history{% endblock %}
+{% block content %}
+    {% set cursor=[{'email':  '1@gmail.com',
+                'destination': 'Destination',
+                'start_date': '11/29/2023',
+                'end_date': '11/30/2023',
+                'accommodation_type': 'Hotel',
+                'accommodation_cost': 1300,
+                'transportation_type': 'Flight',
+                'transportation_cost': 1000,},
+                {'email':  '1@gmail.com',
+                'destination': 'Destination',
+                'start_date': '11/29/2023',
+                'end_date': '11/30/2023',
+                'accommodation_type': 'Hotel',
+                'accommodation_cost': 1300,
+                'transportation_type': 'Flight',
+                'transportation_cost': 1000,}] %}
+    <h1> hello {{ session['email'] }},this page shows all your travel history</h1>
+    {% for document in cursor %}
+        <h3> {{ document }}</h3>
+    {% endfor %}
+{% endblock %}
+
