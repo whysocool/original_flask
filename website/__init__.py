@@ -15,7 +15,7 @@ def create_app():
 
     app.register_blueprint(views.bp)
     app.register_blueprint(auth.bp)
-    # create_2_collections(CSV_PATH, db)
+    create_2_collections(CSV_PATH, db)
 
     return app
 
@@ -105,4 +105,7 @@ def create_2_collections(path_of_csv, db):
                 'transportation_cost': row['Transportation cost'],
             }
             db.histories.insert_one(new_history)
+        print('-----------------------------------')
+        print('writing csv into mongodb completed.')
+        print('-----------------------------------')
     return

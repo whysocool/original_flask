@@ -1,10 +1,19 @@
-# import pymongo
+import pymongo
+
 # import pandas as pd
-#
-# myclient = pymongo.MongoClient("mongodb://localhost:27017/")
-# db = myclient["mydatabase"]
-# users=db.users
-# users.drop()
+
+myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+db = myclient["mydatabase"]
+db.users.drop()
+db.histories.drop()
+
+# cursor = db.histories.find({})
+# a=0
+# for document in cursor:
+#     a=a+1
+#     print(document)
+# print(a)
+
 # CSV_PATH = "./Travel details dataset.csv"
 #
 #
