@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}One user history{% endblock %}
+{% block content %}
+    <h1> hello {{ session['email'] }},this page shows all your travel history</h1>
+    {% for document in cursor %}
+        <h3> {{ document }}</h3>
+    {% endfor %}
+{% endblock %}
+
