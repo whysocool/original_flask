@@ -9,6 +9,13 @@ db = myclient["mydatabase"]
 #     'email': 'shabi@gmail.com',
 #     'password': generate_password_hash('12345678'),
 # }
+
+
+# myquery = db.users.find_one({'email': 'dashabi@gmail.com'})
+# new_document = {"$set": {"email": "shabi@gmail.com", 'password': generate_password_hash('12345678')}}
+#
+# db.users.update_one(myquery, new_document)
+print(db.users.find_one({'email':'shabi@gmail.com'}))
 # db.users.insert_one(user_shabi)
 # history_shabi_1 = {
 #     'email': 'shabi@gmail.com',
@@ -33,8 +40,6 @@ db = myclient["mydatabase"]
 # db.histories.insert_one(history_shabi_2)
 # db.histories.insert_one(history_shabi_1)
 
-result = db.users.find_one({'email': 'shabi@gmail.com'})
-print(result['name'])
 
 # cursor = db.histories.find({})
 # a=0

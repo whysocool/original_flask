@@ -2,7 +2,6 @@
 {% block title %}Home{% endblock %}
 {% block content %}
     {% set fullName = user_found.get('fullName',None) %}
-    {% set email = session['email'] %}
     {% set nationality = user_found.get('nationality',None) %}
     {% set password = user_found.get('password',None) %}
     {% set age = user_found.get('age',None) %}
@@ -22,15 +21,6 @@
                    name="fullName"
                    placeholder="Enter full name"
                    value="{{ fullName if fullName }}">
-        </div>
-        <div class="mb-3">
-            <label for="email" class="form-label">Email Address</label>
-            <input type="email"
-                   class="form-control"
-                   id="email"
-                   name="email"
-                   placeholder="Enter email"
-                   value="{{ email }}">
         </div>
         <div class="mb-3">
             <label for="nationality" class="form-label">Nationality</label>
@@ -65,7 +55,7 @@
                    class="form-control"
                    id="gender"
                    name="gender"
-                   placeholder="Enter gender"
+                   placeholder="Enter gender: Male or Female"
                    value="{{ gender if gender }}">
         </div>
         <div class="mb-3">
