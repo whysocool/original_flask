@@ -14,6 +14,7 @@
             /* Add additional styles if needed */
             color: white; /* Set text color to white for better visibility */
         }
+
         .container {
             text-align: center;
             padding: 20px;
@@ -27,39 +28,42 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 {% block title %}Home{% endblock %}
+<body>
 {% block content %}
     {% if 'email' in session %}
-    	 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">User: {% user.email %}</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Modify Profile<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">View Travel History</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">View Travel Recommendations</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Book a Trip</a>
-            </li>
-        </ul>
-    </div>
-</nav>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">User: {{ session['email'] }}</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Modify Profile<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">View Travel History</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">View Travel Recommendations</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Book a Trip</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
     {% else %}
         <div class="container">
-        <h1>Welcome to Explorify</h1>
-        <p>Please log in or sign up first.</p>
-    </div>
+            <h1>Welcome to Explorify</h1>
+            <p>Please log in or sign up first.</p>
+        </div>
     {% endif %}
 {% endblock %}
+</body>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
