@@ -2,8 +2,46 @@
 {% block title %}One user history{% endblock %}
 {% block content %}
     <h1> hello {{ session['email'] }},this page shows all your travel history</h1>
-    {% for document in cursor %}
-        <h3> {{ document }}</h3>
-    {% endfor %}
+    <div class="container">
+        <table class="table table-dark table-striped-columns table-hover ">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Email</th>
+                <th scope="col">Destination</th>
+                <th scope="col">Start Date</th>
+                <th scope="col">End Date</th>
+                <th scope="col">Accommodation Type</th>
+                <th scope="col">Accommodation Cost</th>
+                <th scope="col">Transportation Type</th>
+                <th scope="col">Transportation Cost</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% set index=1 %}
+            {% for document in cursor %}
+                <h3>{{ document }}</h3>
+                <tr>
+                    <th scope="row">{{ index }}</th>
+                    <td>{{ document['email'] }}</td>
+                    <td>{{ document['destination'] }}</td>
+                    <td>{{ document.start_date }}</td>
+                    <td>{{ document.end_date }}</td>
+                    <td>{{ document.accommodation_type }}</td>
+                    <td>{{ document.accommodation_cost }}</td>
+                    <td>{{ document.transportation_type }}</td>
+                    <td>{{ document.transportation_cost }}</td>
+                </tr>
+                {% set index=index+1 %}
+            {% endfor %}
+            </tbody>
+    </div>
+
 {% endblock %}
+
+
+
+
+
+
 

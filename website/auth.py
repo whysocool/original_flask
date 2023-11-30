@@ -56,6 +56,9 @@ def login():
     return render_template("login.html")
 
 
+
+
+
 @bp.route('/logout')
 def logout():
     session.pop('email', None)

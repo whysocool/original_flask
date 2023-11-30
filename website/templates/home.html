@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 {% block title %}Home{% endblock %}
 {% block content %}
+    {% set email=session['email'] %}
     {% if 'email' in session %}
-    	 <h1> This is the temporary home page for user {{ session['email'] }}</h1>>
+    	 <h1> This is the temporary home page for user {{ email }}</h1>>
     {% else %}
         <h1> please log in or sign up first</h1>
     {% endif %}

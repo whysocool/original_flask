@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+    {% set fullName = user_found.get('fullName',None) %}
+    {% set email = session['email'] %}
+    {% set nationality = user_found.get('nationality',None) %}
+    {% set password = user_found.get('password',None) %}
+    {% set age = user_found.get('age',None) %}
+    {% set gender = user_found.get('gender',None) %}
+    {% set budget_accommodation = user_found.get('budget_accommodation',None) %}
+    {% set budget_transportation = user_found.get('budget_transportation',None) %}
+
+    <h1> hello {{ session['email'] }},this page allows you to modify or check your profile</h1>
+
+    <form method="post">
+        <h3 class="text-center">Profile</h3>
+        <div class="mb-3">
+            <label for="fullName" class="form-label">Full Name</label>
+            <input type="text"
+                   class="form-control"
+                   id="fullName"
+                   name="fullName"
+                   placeholder="Enter full name"
+                   value="{{ fullName if fullName }}">
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email Address</label>
+            <input type="email"
+                   class="form-control"
+                   id="email"
+                   name="email"
+                   placeholder="Enter email"
+                   value="{{ email }}">
+        </div>
+        <div class="mb-3">
+            <label for="nationality" class="form-label">Nationality</label>
+            <input type="text"
+                   class="form-control"
+                   id="nationality"
+                   name="nationality"
+                   placeholder="Enter nationality"
+                   value="{{ nationality if nationality }}">
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password"
+                   class="form-control"
+                   id="password"
+                   name="password"
+                   placeholder="Enter password"
+                   value="{{ password if password }}">
+        </div>
+        <div class="mb-3">
+            <label for="age" class="form-label">Age</label>
+            <input type="text"
+                   class="form-control"
+                   id="age"
+                   name="age"
+                   placeholder="Enter age"
+                   value="{{ age if age }}">
+        </div>
+        <div class="mb-3">
+            <label for="gender" class="form-label">Gender</label>
+            <input type="text"
+                   class="form-control"
+                   id="gender"
+                   name="gender"
+                   placeholder="Enter gender"
+                   value="{{ gender if gender }}">
+        </div>
+        <div class="mb-3">
+            <label for="budget_accommodation" class="form-label">Budget Accommodation</label>
+            <input type="text"
+                   class="form-control"
+                   id="budget_accommodation"
+                   name="budget_accommodation"
+                   placeholder="Enter budget accommodation"
+                   value="{{ budget_accommodation if budget_accommodation }}">
+        </div>
+        <div class="mb-3">
+            <label for="budget_transportation" class="form-label">Budget Transportation</label>
+            <input type="text"
+                   class="form-control"
+                   id="budget_transportation"
+                   name="budget_transportation"
+                   placeholder="Enter budget transportation"
+                   value="{{ budget_transportation if budget_transportation }}">
+        </div>
+        <button class="btn btn-primary" type="submit">Modify</button>
+    </form>
+
+{% endblock %}

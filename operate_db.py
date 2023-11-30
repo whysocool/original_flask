@@ -1,11 +1,40 @@
 import pymongo
+from werkzeug.security import generate_password_hash
 
 # import pandas as pd
 
 myclient = pymongo.MongoClient("mongodb://localhost:27017/")
 db = myclient["mydatabase"]
-db.users.drop()
-db.histories.drop()
+# user_shabi = {
+#     'email': 'shabi@gmail.com',
+#     'password': generate_password_hash('12345678'),
+# }
+# db.users.insert_one(user_shabi)
+# history_shabi_1 = {
+#     'email': 'shabi@gmail.com',
+#     'destination': 'cheshuo',
+#     'start_date': '11/29/2023',
+#     'end_date': '11/30/2023',
+#     'accommodation_type': 'Hotel',
+#     'accommodation_cost': 1200,
+#     'transportation_type': 'Flight',
+#     'transportation_cost': 600,
+# }
+# history_shabi_2 = {
+#     'email': 'shabi@gmail.com',
+#     'destination': 'chufang',
+#     'start_date': '11/27/2023',
+#     'end_date': '11/28/2023',
+#     'accommodation_type': 'Hotel',
+#     'accommodation_cost': 100,
+#     'transportation_type': 'Flight',
+#     'transportation_cost': 200,
+# }
+# db.histories.insert_one(history_shabi_2)
+# db.histories.insert_one(history_shabi_1)
+
+result = db.users.find_one({'email': 'shabi@gmail.com'})
+print(result['name'])
 
 # cursor = db.histories.find({})
 # a=0
