@@ -17,10 +17,10 @@
         </tr>
         </thead>
         <tbody>
-        {% set index=1 %}
+
         {% for document in cursor %}
             <tr>
-                <th scope="row">{{ index }}</th>
+                <th scope="row">{{ loop.index }}</th>
                 <td>{{ document['email'] }}</td>
                 <td>{{ document['destination'] }}</td>
                 <td>{{ document.start_date }}</td>
@@ -30,8 +30,12 @@
                 <td>{{ document.transportation_type }}</td>
                 <td>{{ document.transportation_cost }}</td>
             </tr>
-            {% set index = index + 1 %}
         {% endfor %}
         </tbody>
    </table>
+{% endblock %}
+{% block javascript %}
+<script>
+    document.getElementById("history").classList.add("active")
+</script>
 {% endblock %}

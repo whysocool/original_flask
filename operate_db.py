@@ -4,7 +4,7 @@ from werkzeug.security import generate_password_hash
 # import pandas as pd
 
 myclient = pymongo.MongoClient("mongodb://localhost:27017/")
-db = myclient["mydatabase"]
+myclient.drop_database('mydatabase')
 # db.users.delete_one({'email': 'dashabi@gmail.com'})
 # user_shabi = {
 #     'email': 'shabi@gmail.com',
@@ -16,7 +16,7 @@ db = myclient["mydatabase"]
 # new_document = {"$set": {'password': generate_password_hash('12345678')}}
 #
 # db.users.update_one(myquery, new_document)
-print(type(db.users.find_one({'email': 'shabi@gmail.com'})['budget_accommodation']))
+# print(type(db.users.find_one({'email': 'shabi@gmail.com'})['budget_accommodation']))
 # db.users.insert_one(user_shabi)
 # history_shabi_1 = {
 #     'email': 'shabi@gmail.com',

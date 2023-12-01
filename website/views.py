@@ -33,6 +33,12 @@ def modify_one_user_profile():
         gender = request.form.get('gender')
         budget_accommodation = request.form.get('budget_accommodation')
         budget_transportation = request.form.get('budget_transportation')
+        try:
+            int(age) or int(budget_transportation) or int(budget_accommodation)
+        except Exception as e:
+            flash('please enter integer.', category='error')
+            return render_template('/modify_one_user_profile.html',
+                                   user_found=db.users.find_one({'email': session['email']}))
         if len(fullName) < 2:
             flash('full name must be greater than 1 characters.', category='error')
         elif len(nationality) < 3:
@@ -42,7 +48,7 @@ def modify_one_user_profile():
         elif int(age) < 0:
             flash('age must be great than 0.', category='error')
         elif not (gender in ('Male', 'Female')):
-            flash('gender must be Male or Female.', category='error')
+            flash("gender must be 'Male' or 'Female'.", category='error')
         elif int(budget_accommodation) < 0:
             flash('budget must be greater than 0.', category='error')
         elif int(budget_transportation) < 0:
@@ -70,6 +76,11 @@ def modify_one_user_profile():
 
 @bp.route('/get_recommendation_list', methods=['GET'])
 def get_recommendation_list():
+    user_found = db.users.find_one({'email': session['email']})
+    flag_profile = user_found.get('budget_transportation', None)
+    if flag_profile is None:
+        flash('to see recommendation, you need to fill out your profile form.', category='error')
+        return redirect(url_for('views.modify_one_user_profile'))
     # create df1 [email, age, gender, nationality, budget_accommodation, budget_transportation]
     df1 = pd.DataFrame(list(db.users.find()))
     df1 = df1.drop(['_id', 'fullName', 'password'], axis=1)
@@ -87,20 +98,22 @@ def get_recommendation_list():
     df_email = df2[['email']]
 
     df_email = df_email[df_email.duplicated(keep=False)]
-    index_candidate = df_email.groupby(list(df_email)).apply(lambda x: tuple(x.index)).tolist()
-    index_save = []
-    for tuple_element in index_candidate:  # for each tuple, they have same emails
-        index_latest = tuple_element[0]
-        for index in tuple_element:
-            if parse(df2.iloc[index]['end_date']) > parse(df2.iloc[index_latest]['end_date']):
-                index_latest = index
-        index_save.append(index_latest)
-    index_all_candidate = []
-    for e in index_candidate:
-        for f in e:
-            index_all_candidate.append(f)
-    index_to_be_deleted = list(set(index_all_candidate) - set(index_save))
-    df2 = df2.drop(index_to_be_deleted)
+    if isinstance(df_email.groupby(list(df_email)).apply(lambda x: tuple(x.index)),
+              pd.Series):  # some users have more than 1 travel history
+        index_candidate = df_email.groupby(list(df_email)).apply(lambda x: tuple(x.index)).tolist()
+        index_save = []
+        for tuple_element in index_candidate:  # for each tuple, they have same emails
+            index_latest = tuple_element[0]
+            for index in tuple_element:
+                if parse(df2.iloc[index]['end_date']) > parse(df2.iloc[index_latest]['end_date']):
+                    index_latest = index
+            index_save.append(index_latest)
+        index_all_candidate = []
+        for e in index_candidate:
+            for f in e:
+                index_all_candidate.append(f)
+        index_to_be_deleted = list(set(index_all_candidate) - set(index_save))
+        df2 = df2.drop(index_to_be_deleted)
     df2 = df2.drop(['end_date'], axis=1)  # now each only has one travel history remaining
 
     # merge those 2 dataframes
@@ -188,6 +201,14 @@ def book_travel():
         accommodation_cost = request.form.get('accommodation_cost')
         transportation_type = request.form.get('transportation_type')
         transportation_cost = request.form.get('transportation_cost')
+
+        # this is to avoid crash if the user does not input date format
+        try:
+            parse(start_date) or parse(end_date)
+        except Exception as e:
+            flash(e, category='error')
+            return render_template('/book_travel.html')
+
         if len(destination) < 2:
             flash('destination must be greater than 1 character.', category='error')
         elif parse(start_date) > parse(end_date):
@@ -212,6 +233,14 @@ def book_travel():
                 'transportation_type': transportation_type,
                 'transportation_cost': transportation_cost,
             })
-            flash('book travel successfully.', category='success')
+            # here we need to change the budget_accommodation and budget transportation in profile.
+            # because previous bill can reflect real budget
+            myquery = db.users.find_one({'email': session['email']})
+            new_document = {
+                "$set": {'budget_accommodation': accommodation_cost,
+                         'budget_transportation': transportation_cost}
+            }
+            db.users.update_one(myquery, new_document)
+            flash('book travel successfully. Also the budget in profile has been updated.', category='success')
             return redirect(url_for('views.home'))
     return render_template('/book_travel.html')

@@ -52,12 +52,16 @@
         </div>
         <div class="mb-3">
             <label for="gender" class="form-label">Gender</label>
-            <input type="text"
-                   class="form-control"
-                   id="gender"
-                   name="gender"
-                   placeholder="Enter gender: Male or Female"
-                   value="{{ gender if gender }}">
+            <select name="gender" id="gender" class="form-select">
+                {% if gender %}
+                    <option value="{{ gender }}" selected>{{ gender }}</option>
+                    <option value="{{ 'Female' if gender=='Male' else 'Male' }}">{{ 'Female' if gender=='Male' else 'Male' }}</option>
+                {% else %}
+                    <option selected>Open this select menu</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                {% endif %}
+            </select>
         </div>
         <div class="mb-3">
             <label for="budget_accommodation" class="form-label">Budget Accommodation</label>
@@ -80,4 +84,9 @@
         <button class="btn btn-primary" type="submit">Modify</button>
     </form>
     <br>
+{% endblock %}
+{% block javascript %}
+<script>
+    document.getElementById("profile").classList.add("active")
+</script>
 {% endblock %}

@@ -8,4 +8,8 @@
         <h1> please log in or sign up first</h1>
     {% endif %}
 {% endblock %}
-
+{% block javascript %}
+<script>
+    document.getElementById("home").classList.add("active")
+</script>
+{% endblock %}

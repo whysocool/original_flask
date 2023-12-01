@@ -53,7 +53,8 @@ def login():
             else:
                 flash("incorrect password", category='error')
         else:
-            flash("email does not exit", category='error')
+            flash("email does not exit, please sign up first.", category='error')
+            return redirect(url_for('auth.sign_up'))
     return render_template("login.html")
 
 
