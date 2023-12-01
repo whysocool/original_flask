@@ -33,7 +33,8 @@ def sign_up():  # view function
             }
             db.users.insert_one(new_user)
             flash('account created', category='success')
-            return redirect(url_for('auth.login'))
+            session['email'] = email
+            return redirect(url_for('views.home'))
     return render_template("sign_up.html")
 
 
@@ -54,9 +55,6 @@ def login():
         else:
             flash("email does not exit", category='error')
     return render_template("login.html")
-
-
-
 
 
 @bp.route('/logout')

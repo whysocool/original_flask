@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}Book Travel{% endblock %}
+{% block content %}
+
+    <h1> hello {{ session['email'] }},this page allows you to book a travel</h1>
+
+    <form method="post">
+        <h3 class="text-center">Book a travel</h3>
+        <div class="mb-3">
+            <label for="destination" class="form-label">Destination</label>
+            <input type="text"
+                   class="form-control"
+                   id="destination"
+                   name="destination"
+                   placeholder="Enter destination">
+        </div>
+        <div class="mb-3">
+            <label for="start_date" class="form-label">Start Date</label>
+            <input type="text"
+                   class="form-control"
+                   id="start_date"
+                   name="start_date"
+                   placeholder="mm/dd/yy">
+            <div class="form-text">example: '12/1/23'</div>
+        </div>
+        <div class="mb-3">
+            <label for="end_date" class="form-label">End Date</label>
+            <input type="text"
+                   class="form-control"
+                   id="end_date"
+                   name="end_date"
+                   placeholder="mm/dd/yy">
+            <div class="form-text">example: '12/1/23'</div>
+        </div>
+        <div class="mb-3">
+            <label for="accommodation_type" class="form-label">Accommodation Type</label>
+            <input type="text"
+                   class="form-control"
+                   id="accommodation_type"
+                   name="accommodation_type"
+                   placeholder="Enter accommodation type">
+            <div class="form-text">choose between: Hostel, Hotel, Airbnb, Villa, Resort</div>
+        </div>
+        <div class="mb-3">
+            <label for="accommodation_cost" class="form-label">Accommodation Cost</label>
+            <input type="text"
+                   class="form-control"
+                   id="accommodation_cost"
+                   name="accommodation_cost"
+                   placeholder="Enter accommodation cost">
+        </div>
+        <div class="mb-3">
+            <label for="transportation_type" class="form-label">Transportation Type</label>
+            <input type="text"
+                   class="form-control"
+                   id="transportation_type"
+                   name="transportation_type"
+                   placeholder="Enter transportation type">
+            <div class="form-text">choose between: Train, Plane, Flight, Bus, Car rental, Car, Airplane, Ferry, Subway</div>
+        </div>
+        <div class="mb-3">
+            <label for="transportation_cost" class="form-label">Transportation Cost</label>
+            <input type="text"
+                   class="form-control"
+                   id="transportation_cost"
+                   name="transportation_cost"
+                   placeholder="Enter transportation cost">
+        </div>
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+    <br>
+{% endblock %}

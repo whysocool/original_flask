@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Home{% endblock %}
+{% block title %}Profile{% endblock %}
 {% block content %}
     {% set fullName = user_found.get('fullName',None) %}
     {% set nationality = user_found.get('nationality',None) %}
@@ -39,6 +39,7 @@
                    name="password"
                    placeholder="Enter password"
                    value="{{ password if password }}">
+            <div class="form-text">We only store encrypted password.</div>
         </div>
         <div class="mb-3">
             <label for="age" class="form-label">Age</label>
@@ -78,5 +79,5 @@
         </div>
         <button class="btn btn-primary" type="submit">Modify</button>
     </form>
-
+    <br>
 {% endblock %}
